@@ -14,18 +14,28 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@headlessui/react": "^1.4.1",
     "@types/react": "17.0.30",
+    "@types/ua-parser-js": "^0.7.36",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/fortmatic-connector": "^6.1.6",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/portis-connector": "^6.1.9",
+    "@web3-react/walletconnect-connector": "^6.2.7",
+    "@web3-react/walletlink-connector": "^6.2.7",
     "autoprefixer": "^10.3.7",
     "eslint": "8.0.1",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.3.0",
+    "ethers": "^5.5.1",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",
     "postcss": "^8.3.9",
     "prettier": "^2.4.1",
     "react-icons": "^4.3.1",
     "tailwindcss": "^2.2.17",
-    "typescript": "4.4.4"
+    "typescript": "4.4.4",
+    "ua-parser-js": "^1.0.1"
   }
 }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const defaultTheme = require('tailwindcss/defaultTheme')
+//const colors = require('tailwindcss/colors')
 
 module.exports = {
   mode: 'jit',
@@ -11,6 +12,8 @@ module.exports = {
         primary: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        //white: '#ffffff',
+        //black: '#000000',
         dark: {
           400: '#21222A',
           500: '#101117',
