@@ -21,7 +21,6 @@ export const AccountDetails: React.FC = ({}) => {
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .catch((error: any) => {
-          //toast error
           setError(error.message)
           setSuccess(false)
         })
