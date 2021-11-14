@@ -9,6 +9,7 @@ import { WalletOption } from '@/components/WalletOption'
 import { isMobile } from 'utils/userAgent'
 import { WalletPendingView } from '@/components/WalletPendingView'
 import usePrevious from 'hooks/usePrevious'
+import { AccountDetails } from '../AccountDetails'
 
 const MetamaskIcon = '/images/metamask.svg'
 
@@ -60,30 +61,6 @@ export const Wallets: React.FC = ({}) => {
     activePrevious,
     connectorPrevious,
   ])
-
-  //sign and save user when connection is done
-  useEffect(() => {
-    if (!!(library && account)) {
-      library
-        .getSigner(account)
-        .signMessage(process.env.NEXT_PUBLIC_SIGN_KEY)
-        .then(async (signature: string) => {
-          console.log(signature)
-          // toast signature success
-          // save db: const result = await WalletService.authWallet(account, signature)
-          /* if (result) {
-            //success save in db
-            return Router.replace('/')
-          } */
-        })
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .catch((error: any) => {
-          //toast error
-          console.log(error)
-        })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account, library])
 
   const tryActivation = async (connector: AbstractConnector | undefined) => {
     let name = ''
@@ -227,7 +204,7 @@ export const Wallets: React.FC = ({}) => {
       )
     }
     if (account && walletView === WALLET_VIEWS.ACCOUNT) {
-      return <h5>{account}</h5>
+      return <AccountDetails />
     }
 
     return walletView === WALLET_VIEWS.PENDING ? (

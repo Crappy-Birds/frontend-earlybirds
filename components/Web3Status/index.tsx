@@ -7,7 +7,7 @@ function Web3StatusInner() {
   const { account, error } = useWeb3React()
 
   if (account) {
-    return <p className="text-base"> Logged-in as {account}</p>
+    return <></>
   } else if (error) {
     return (
       <p color="red">
@@ -16,7 +16,9 @@ function Web3StatusInner() {
     )
   } else {
     return (
-      <p className="text-lg">Sign in with one of available wallet providers</p>
+      <p className="text-lg text-center">
+        Sign in with one of available wallet providers
+      </p>
     )
   }
 }

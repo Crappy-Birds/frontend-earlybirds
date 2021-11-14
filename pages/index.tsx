@@ -11,12 +11,12 @@ const Home: NextPage = () => {
         <meta name="description" content="Early Birds" />
       </Head>
 
-      <header className="absolute top-0 left-0 flex items-center justify-center w-full h-24">
+      <header className="absolute top-0 left-0 flex items-center justify-center w-full h-28">
         <Image
           src="/images/logo.png"
           alt="Crappy Birds Logo"
-          width={498 / 2}
-          height={115 / 2}
+          width={498 / 1.5}
+          height={115 / 1.5}
         />
       </header>
       <main className="flex flex-col items-center justify-center w-full h-full space-y-5">
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
             <h1 className="text-xl italic font-bold uppercase">
               You&#39;re early!
             </h1>
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col max-w-xs space-y-4 break-words md:max-w-lg">
               <Web3Status />
             </div>
           </div>
