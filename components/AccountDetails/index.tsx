@@ -2,22 +2,56 @@ import { useWeb3React } from '@web3-react/core'
 import React, { useState } from 'react'
 import { HiCheckCircle, HiX } from 'react-icons/hi'
 import { ButtonIcon } from '../ButtonIcon'
+import { useRouter } from 'next/router'
+
+export interface LinkUserResponse {
+  type: string
+}
+
+function linkUser(
+  walletAddress: string,
+  discordAddress: string | string[]
+): Promise<LinkUserResponse> {
+  return new Promise<LinkUserResponse>((resolve, reject) => {
+    fetch(`${process.env.NEXT_PUBLIC_API}wallet/discord`, {
+      method: 'post',
+      body: JSON.stringify({
+        walletAddress: walletAddress,
+        discordAddress: discordAddress,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((res: any) => {
+        res.status === 200 ? resolve(res.json()) : reject(res.json())
+      })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .catch((error: any) => reject(error))
+  })
+}
 
 export const AccountDetails: React.FC = ({}) => {
   const { account, library } = useWeb3React()
+  const router = useRouter()
+  const { id } = router.query
 
-  const [error, setError] = useState<string>()
+  const [error, setError] = useState<string>('')
   const [success, setSuccess] = useState<boolean>(false)
 
-  function validateAccount() {
-    if (!!(library && account)) {
+  async function validateAccount() {
+    if (!!(library && account && id)) {
       library
         .getSigner(account)
         .signMessage(process.env.NEXT_PUBLIC_SIGN_KEY)
-        .then(async (signature: string) => {
-          console.log(signature)
-          /** @todo save data */
-          setSuccess(true)
+        .then(async () => {
+          const result = await linkUser(account, id)
+          if (result.type == 'success') {
+            setSuccess(true)
+          } else {
+            setError('An error occured.')
+          }
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .catch((error: any) => {
@@ -30,7 +64,7 @@ export const AccountDetails: React.FC = ({}) => {
   return (
     <div className="space-y-5">
       <p>Sign a message to validate your entry</p>
-      {error && (
+      {error != '' && (
         <div className="p-4 bg-red-100 rounded-md">
           <div className="flex">
             <div className="flex-shrink-0">
