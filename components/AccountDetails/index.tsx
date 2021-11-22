@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 
 export interface LinkUserResponse {
   type: string
+  error?: string
 }
 
 function linkUser(
@@ -47,10 +48,11 @@ export const AccountDetails: React.FC = ({}) => {
         .signMessage(process.env.NEXT_PUBLIC_SIGN_KEY)
         .then(async () => {
           const result = await linkUser(account, id)
+          console.log(result)
           if (result.type == 'success') {
             setSuccess(true)
-          } else {
-            setError('An error occured.')
+          } else if (result.type == 'error' && result.error) {
+            setError(result.error)
           }
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
