@@ -51,8 +51,8 @@ export const AccountDetails: React.FC = ({}) => {
           console.log(result)
           if (result.type == 'success') {
             setSuccess(true)
-          } else if (result.type == 'error' && result.error) {
-            setError(result.error)
+          } else if (result.type == 'error') {
+            setError(result.error || 'An error occured.')
           }
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,7 +66,7 @@ export const AccountDetails: React.FC = ({}) => {
   return (
     <div className="space-y-5">
       <p>Sign a message to validate your entry</p>
-      {error != '' && (
+      {error != undefined && error != '' && (
         <div className="p-4 bg-red-100 rounded-md">
           <div className="flex">
             <div className="flex-shrink-0">
