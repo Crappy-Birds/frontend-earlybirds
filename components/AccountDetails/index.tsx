@@ -68,7 +68,7 @@ export const AccountDetails: React.FC = ({}) => {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 text-center">
       <p>Sign a message to validate your entry</p>
       {error && (
         <div className="p-4 bg-red-100 rounded-md">
