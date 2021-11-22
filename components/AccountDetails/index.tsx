@@ -26,7 +26,7 @@ function linkUser(
     })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((res: any) => {
-        res.status === 200 ? resolve(res.json()) : reject(res.json())
+        resolve(res.json())
       })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .catch((error: any) => reject(error))
@@ -38,26 +38,30 @@ export const AccountDetails: React.FC = ({}) => {
   const router = useRouter()
   const { id } = router.query
 
-  const [error, setError] = useState<string>('')
   const [success, setSuccess] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string>('An error occured.')
 
   async function validateAccount() {
+    setError(false)
+    setSuccess(false)
     if (!!(library && account && id)) {
       library
         .getSigner(account)
         .signMessage(process.env.NEXT_PUBLIC_SIGN_KEY)
         .then(async () => {
           const result = await linkUser(account, id)
-          console.log(result)
           if (result.type == 'success') {
             setSuccess(true)
-          } else if (result.type == 'error') {
-            setError(result.error || 'An error occured.')
+          } else if (result.type == 'error' && result.error) {
+            setError(true)
+            setErrorMsg(result.error)
           }
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .catch((error: any) => {
-          setError(error.message)
+          setError(true)
+          setErrorMsg(error.message)
           setSuccess(false)
         })
     }
@@ -66,14 +70,14 @@ export const AccountDetails: React.FC = ({}) => {
   return (
     <div className="space-y-5">
       <p>Sign a message to validate your entry</p>
-      {error != undefined && error != '' && (
+      {error && (
         <div className="p-4 bg-red-100 rounded-md">
           <div className="flex">
             <div className="flex-shrink-0">
               <HiX className="w-5 h-5 text-red-400" aria-hidden="true" />
             </div>
             <div className="flex-1 ml-3 md:flex md:justify-between">
-              <p className="text-sm text-red-700">{error}</p>
+              <p className="text-sm text-red-700">{errorMsg}</p>
             </div>
           </div>
         </div>
