@@ -35,8 +35,8 @@ export default function Web3ReactManager({
     return (
       <div className="m-auto">
         <p>
-          Oops! An unknown error occurred. Please refresh the page, or visit
-          from another browser or device.
+          Oops! Network not supported. Please switch to <b>Ethereum Mainnet</b>{' '}
+          and refresh the page, or visit from another browser or device.
         </p>
       </div>
     )
