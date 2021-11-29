@@ -54,7 +54,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true,
   },
-  /* WALLET_LINK: {
+  WALLET_LINK: {
     connector: walletlink,
     name: 'Coinbase Wallet',
     iconURL: COINBASE_ICON_URL,
@@ -71,7 +71,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     mobile: true,
     mobileOnly: true,
   },
-  FORTMATIC: {
+  /*FORTMATIC: {
     connector: fortmatic,
     name: 'Fortmatic',
     iconURL: FORTMATIC_ICON_URL,

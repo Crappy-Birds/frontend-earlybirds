@@ -8,8 +8,8 @@ import { ALL_SUPPORTED_CHAIN_IDS, SupportedChainId } from '../constants/chain'
 import getLibrary from '../utils/getLibrary'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
-//import LOGO_URL from '../assets/svg/logo.svg'
 
+const LOGO_URL = 'https://early.crappybirds.io/apple-touch-icon.png'
 const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_KEY
 const FORMATIC_KEY = process.env.NEXT_PUBLIC_FORTMATIC_KEY
 const PORTIS_ID = process.env.NEXT_PUBLIC_PORTIS_ID
@@ -64,5 +64,5 @@ export const portis = new PortisConnector({
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URLS[SupportedChainId.MAINNET],
   appName: "Crappy Birds - You're ealy",
-  //appLogoUrl: LOGO_URL,
+  appLogoUrl: LOGO_URL,
 })
